@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import random
 import datetime
 
@@ -76,14 +77,7 @@ input('Нажмите Enter чтобы начать')
 print('Давайте проведем еще 100.000 симуляций.')
 sim_match = 0  # Число операций моделирования с совпадающими днями рождения.
 
-for i in range(100_000):
-    # Отображаем сообщение о ходе выполнения каждые 10 000 операций:
-    if i % 10_000 == 0:
-        if i == 0:
-            print('simulations run...')
-        else:
-            print(f'{i} simulations run...')
-
+for i in tqdm(range(100_000), desc='Обработка симуляций...'):
     birthdays = get_birthdays(numb_days)
     if get_match(birthdays) is not None:
         sim_match = sim_match + 1
@@ -91,8 +85,9 @@ print('100.000 simulations run.')
 
 # Отображаем результаты имитационного моделирования:
 probability = round(sim_match / 100_000 * 100, 2)
-print(f'Out of 100,000 simulations of {numb_days}, people, there was a')
-print(f'matching birthday in that group, {sim_match}, times. This means')
-print(f'that, {numb_days}, people have a, {probability} % chance of')
-print('having a matching birthday in their group.')
-print('That\'s probably more than you would think!')
+
+print(f'''Out of 100,000 simulations of {numb_days}, people, there was a
+matching birthday in that group, {sim_match}, times. 
+This means that, {numb_days}, people have a, {probability} % chance of
+having a matching birthday in their group.
+That's probably more than you would think!''')
