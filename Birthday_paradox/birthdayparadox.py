@@ -1,6 +1,7 @@
-from tqdm import tqdm
-import random
 import datetime
+import random
+
+from tqdm import tqdm
 
 
 def get_birthdays(number_of_birthdays):
